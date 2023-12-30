@@ -3,7 +3,6 @@ name: Build
 on: push
 
 jobs:
-
   cache:
     name: Cache
     runs-on: ubuntu-22.04
@@ -57,6 +56,16 @@ jobs:
       - name: Build (Everything)
         run: |
           make -j 4 -C src everything
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin-x86
+          path: |
+            src/bin*
+            !src/bin*/**/*.o
+            !src/bin*/**/*.map
+            !src/bin*/**/*.tmp
+            !src/bin*/deps
       - name: Test
         run: |
           valgrind ./src/bin-i386-linux/tests.linux
@@ -90,6 +99,16 @@ jobs:
                bin-arm32-efi/intel.efi \
                bin-arm32-efi/intel.usb \
                bin-arm32-efi/intel.iso
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin-arm32
+          path: |
+            src/bin*
+            !src/bin*/**/*.o
+            !src/bin*/**/*.map
+            !src/bin*/**/*.tmp
+            !src/bin*/deps
 
   arm64:
     name: ARM64
@@ -119,3 +138,13 @@ jobs:
                bin-arm64-efi/ipxe.efi \
                bin-arm64-efi/ipxe.usb \
                bin-arm64-efi/ipxe.iso
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin-arm64
+          path: |
+            src/bin*
+            !src/bin*/**/*.o
+            !src/bin*/**/*.map
+            !src/bin*/**/*.tmp
+            !src/bin*/deps
