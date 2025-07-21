@@ -57,7 +57,7 @@ jobs:
         run: |
           make -j 4 -C src everything
       - name: Archive artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bin-x86
           path: |
@@ -100,7 +100,7 @@ jobs:
                bin-arm32-efi/intel.usb \
                bin-arm32-efi/intel.iso
       - name: Archive artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bin-arm32
           path: |
@@ -139,7 +139,7 @@ jobs:
                bin-arm64-efi/ipxe.usb \
                bin-arm64-efi/ipxe.iso
       - name: Archive artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bin-arm64
           path: |
