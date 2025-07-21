@@ -24,6 +24,7 @@
 FILE_LICENCE ( GPL2_OR_LATER_OR_UBDL );
 
 #include <stdio.h>
+#include <string.h>
 #include <errno.h>
 #include <ipxe/pci.h>
 #include <ipxe/settings.h>
@@ -124,5 +125,6 @@ static void pci_settings_init ( void ) {
 
 /** PCI device settings initialiser */
 struct init_fn pci_settings_init_fn __init_fn ( INIT_NORMAL ) = {
+	.name = "pci",
 	.initialise = pci_settings_init,
 };

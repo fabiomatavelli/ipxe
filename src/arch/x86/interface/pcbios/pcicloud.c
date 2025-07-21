@@ -148,6 +148,7 @@ static void * pcicloud_ioremap ( struct pci_device *pci,
 	return pcicloud->pci_ioremap ( pci, bus_addr, len );
 }
 
+PROVIDE_PCIAPI_INLINE ( cloud, pci_can_probe );
 PROVIDE_PCIAPI ( cloud, pci_discover, pcicloud_discover );
 PROVIDE_PCIAPI ( cloud, pci_read_config_byte, pcicloud_read_config_byte );
 PROVIDE_PCIAPI ( cloud, pci_read_config_word, pcicloud_read_config_word );
@@ -190,5 +191,6 @@ static void pcicloud_init ( void ) {
 
 /** Cloud VM PCI configuration space access initialisation function */
 struct init_fn pcicloud_init_fn __init_fn ( INIT_EARLY ) = {
+	.name = "pcicloud",
 	.initialise = pcicloud_init,
 };
